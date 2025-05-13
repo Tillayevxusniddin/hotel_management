@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xonalar</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Xonalar</h1>
+        <a href="/rooms/create" class="button">Yangi xona qo'shish</a>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Xona raqami</th>
+                    <th>Turi</th>
+                    <th>Narxi (bir kecha)</th>
+                    <th>Yaratilgan vaqti</th>
+                    <th>Yangilangan vaqti</th>
+                    <th>Amallar</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% if (rooms && rooms.length > 0) { %>
+                    <% rooms.forEach(room => { %>
+                        <tr>
+                            <td><%= room.id %></td>
+                            <td><%= room.room_number %></td>
+                            <td><%= room.type_name %></td>
+                            <td><%= room.price_per_night %></td>
+                            <td><%= new Date(room.created_at).toLocaleString() %></td>
+                            <td><%= new Date(room.updated_at).toLocaleString() %></td>
+                            <td>
+                                <a href="/rooms/<%= room.id %>" class="button">Ko'rish</a>
+                                <a href="/rooms/<%= room.id %>/edit" class="button">Tahrirlash</a>
+                                <form action="/rooms/<%= room.id %>/delete" method="POST" style="display: inline;">
+                                    <button type="submit" class="delete-button">O'chirish</button>
+                                </form>
+                            </td>
+                        </tr>
+                    <% }); %>
+                <% } else { %>
+                    <tr><td colspan="7">Xonalar topilmadi</td></tr>
+                <% } %>
+            </tbody>
+        </table>
+        <br>
+        <a href="/" class="button">Bosh sahifaga qaytish</a>
+    </div>
+    <script src="/js/script.js"></script>
+</body>
+</html>

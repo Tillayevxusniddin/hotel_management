@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="uz">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Bandlov ma'lumotlari</title>
+        <link rel="stylesheet" href="/css/style.css">
+    </head>
+    <body>
+        <div class="container">
+            <h1>Bandlov ma'lumotlari</h1>
+            <p><strong>ID:</strong> <%= reservation.id %></p>
+            <p><strong>Mehmon:</strong> <a href="/guests/<%= guest.id %>"><%= guest.full_name %></a> (ID: <%= reservation.guest_id %>)</p>
+            <p><strong>Xona:</strong> <a href="/rooms/<%= room.id %>"><%= room.room_number %> (<%= room.room_type %>)</a> (ID: <%= reservation.room_id %>)</p>
+            <p><strong>Kirish sanasi:</strong> <%= new Date(reservation.check_in_date).toLocaleDateString() %></p>
+            <p><strong>Chiqish sanasi:</strong> <%= new Date(reservation.check_out_date).toLocaleDateString() %></p>
+            <p><strong>Holat:</strong> <%= reservation.status %></p>
+            <p><strong>Yaratilgan vaqti:</strong> <%= new Date(reservation.created_at).toLocaleString() %></p>
+            <p><strong>Yangilangan vaqti:</strong> <%= new Date(reservation.updated_at).toLocaleString() %></p>
+            <br>
+            <a href="/reservations/<%= reservation.id %>/edit" class="button">Tahrirlash</a>
+            <a href="/reservations" class="button">Bandlovlar ro'yxatiga qaytish</a>
+            <a href="/" class="button">Bosh sahifaga qaytish</a>
+        </div>
+        <script src="/js/script.js"></script>
+    </body>
+</html>

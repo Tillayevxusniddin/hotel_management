@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bandlovlar</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Bandlovlar</h1>
+        <a href="/reservations/create" class="button">Yangi bandlov qo'shish</a>
+        <div class="filter-links">
+            <a href="/reservations/filter/by-date-range" class="button">Sana bo‘yicha filtrlash</a>
+            <a href="/reservations/filter/available-rooms" class="button">Bo‘sh xonalarni ko‘rish</a>
+            <a href="/reservations/filter/guests-in-room" class="button">Xonadagi mehmonlarni ko‘rish</a>
+            <a href="/reservations/filter/confirmed-not-checked-in" class="button">Tasdiqlangan, lekin kelmaganlar</a>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Mehmon</th>
+                    <th>Xona</th>
+                    <th>Kirish sanasi</th>
+                    <th>Chiqish sanasi</th>
+                    <th>Holat</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% if (reservations && reservations.length > 0) { %>
+                    <% reservations.forEach(reservation => { %>
+                        <tr>
+                            <td><a href="/reservations/<%= reservation.id %>"><%= reservation.full_name %></a></td>
+                            <td><%= reservation.room_number %></td>
+                            <td><%= new Date(reservation.check_in_date).toLocaleDateString() %></td>
+                            <td><%= new Date(reservation.check_out_date).toLocaleDateString() %></td>
+                            <td><%= reservation.status %></td>
+                        </tr>
+                    <% }); %>
+                <% } else { %>
+                    <tr><td colspan="5">Bandlovlar topilmadi</td></tr>
+                <% } %>
+            </tbody>
+        </table>
+        <a href="/" class="button">Bosh sahifaga qaytish</a>
+    </div>
+</body>
+</html>

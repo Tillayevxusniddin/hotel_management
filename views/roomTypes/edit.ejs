@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xona Turi Tahrirlash</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Xona Turi Tahrirlash</h1>
+        <% if (error) { %>
+            <p style="color: red;"><%= error %></p>
+        <% } %>
+        <form action="/room-types/<%= roomType.id %>" method="POST">
+            <input type="hidden" name="_method" value="PUT">
+            <div>
+                <label for="type_name">Nomi:</label>
+                <input type="text" id="type_name" name="type_name" value="<%= roomType.type_name %>" required>
+            </div>
+            <div>
+                <label for="description">Tavsif:</label>
+                <input type="text" id="description" name="description" value="<%= roomType.description || '' %>">
+            </div>
+            <button type="submit">Saqlash</button>
+        </form>
+        <br>
+        <a href="/room-types/<%= roomType.id %>" class="button">Orqaga qaytish</a>
+        <a href="/room-types" class="button">Xona turlari ro‘yxatiga qaytish</a>
+        <a href="/" class="button">Bosh sahifaga qaytish</a>
+    </div>
+    <script src="/js/script.js"></script>
+</body>
+</html>

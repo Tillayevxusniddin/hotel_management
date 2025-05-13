@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xonadagi mehmonlar</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Xonadagi mehmonlar</h1>
+        <form action="/reservations/filter/guests-in-room" method="GET">
+            <label for="room_id">Xona:</label>
+            <select id="room_id" name="room_id" required>
+                <% if (rooms && rooms.length > 0) { %>
+                    <% rooms.forEach(room => { %>
+                        <option value="<%= room.id %>" <%= room_id === room.id ? 'selected' : '' %>>
+                            <%= room.room_number %> (<%= room.type_name || 'N/A' %>)
+                        </option>
+                    <% }); %>
+                <% } else { %>
+                    <option value="">Xonalar topilmadi</option>
+                <% } %>
+            </select>
+            <label for="start_date">Boshlanish sanasi:</label>
+            <input type="date" id="start_date" name="start_date" value="<%= start_date || '' %>" required>
+            <label for="end_date">Tugash sanasi:</label>
+            <input type="date" id="end_date" name="end_date" value="<%= end_date || '' %>" required>
+            <button type="submit">Ko‘rish</button>
+        </form>
+        <% if (error) { %>
+            <p style="color: red;"><%= error %></p>
+        <% } %>
+        <% if (guests && guests.length > 0) { %>
+            <h2>Natijalar</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Ism</th>
+                        <th>Email</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% guests.forEach(guest => { %>
+                        <tr>
+                            <td><%= guest.full_name %></td>
+                            <td><%= guest.email || 'N/A' %></td>
+                        </tr>
+                    <% }); %>
+                </tbody>
+            </table>
+        <% } else if (room_id && start_date && end_date) { %>
+            <p>Mehmonlar topilmadi</p>
+        <% } %>
+        <a href="/reservations" class="button">Bandlovlar ro‘yxatiga qaytish</a>
+    </div>
+</body>
+</html>

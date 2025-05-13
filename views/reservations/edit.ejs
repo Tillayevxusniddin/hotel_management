@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bandlovni tahrirlash</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Bandlovni tahrirlash</h1>
+        <% if (error) { %>
+            <p style="color: red;"><%= error %></p>
+        <% } %>
+        <form action="/reservations/<%= reservation.id %>/update" method="POST">
+            <div>
+                <label for="guest_id">Mehmon:</label>
+                <select id="guest_id" name="guest_id" required>
+                    <% if (guests && guests.length > 0) { %>
+                        <% guests.forEach(guest => { %>
+                            <option value="<%= guest.id %>" <%= reservation.guest_id === guest.id ? 'selected' : '' %>><%= guest.full_name %></option>
+                        <% }); %>
+                    <% } else { %>
+                        <option value="">Mehmonlar topilmadi</option>
+                    <% } %>
+                </select>
+            </div>
+            <div>
+                <label for="room_id">Xona:</label>
+                <select id="room_id" name="room_id" required>
+                    <% if (rooms && rooms.length > 0) { %>
+                        <% rooms.forEach(room => { %>
+                            <option value="<%= room.id %>" <%= reservation.room_id === room.id ? 'selected' : '' %>><%= room.room_number %> (<%= room.type_name || 'N/A' %>)</option>
+                        <% }); %>
+                    <% } else { %>
+                        <option value="">Xonalar topilmadi</option>
+                    <% } %>
+                </select>
+            </div>
+            <div>
+                <label for="check_in_date">Kirish sanasi:</label>
+                <input type="date" id="check_in_date" name="check_in_date" value="<%= reservation.check_in_date.toISOString().split('T')[0] %>" required>
+            </div>
+            <div>
+                <label for="check_out_date">Chiqish sanasi:</label>
+                <input type="date" id="check_out_date" name="check_out_date" value="<%= reservation.check_out_date.toISOString().split('T')[0] %>" required>
+            </div>
+            <div>
+                <label for="status">Holat:</label>
+                <select id="status" name="status" required>
+                    <option value="confirmed" <%= reservation.status === 'confirmed' ? 'selected' : '' %>>Tasdiqlangan</option>
+                    <option value="checked_in" <%= reservation.status === 'checked_in' ? 'selected' : '' %>>Ro'yxatdan o'tgan</option>
+                    <option value="checked_out" <%= reservation.status === 'checked_out' ? 'selected' : '' %>>Chiqib ketgan</option>
+                    <option value="cancelled" <%= reservation.status === 'cancelled' ? 'selected' : '' %>>Bekor qilingan</option>
+                </select>
+            </div>
+            <button type="submit">Saqlash</button>
+        </form>
+        <br>
+        <a href="/reservations/<%= reservation.id %>" class="button">Bandlov ma'lumotlariga qaytish</a>
+        <a href="/reservations" class="button">Bandlovlar ro'yxatiga qaytish</a>
+        <a href="/" class="button">Bosh sahifaga qaytish</a>
+    </div>
+    <script src="/js/script.js"></script>
+</body>
+</html>

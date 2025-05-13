@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mehmonlar</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Mehmonlar</h1>
+        <% if (locals.filterMessage) { %>
+            <p><%= filterMessage %></p>
+        <% } %>
+        <a href="/guests/create" class="button">Yangi mehmon qo'shish</a>
+        <table>
+            <thead>
+                <tr>
+                    <th>Ism</th>
+                    <th>Telefon</th>
+                    <th>Email</th>
+                    <th>Manzil</th>
+                    <th>Yaratilgan vaqti</th>
+                    <th>Yangilangan vaqti</th>
+                    <th>Amallar</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% if (guests && guests.length > 0) { %>
+                    <% guests.forEach(guest => { %>
+                        <tr>
+                            <td><%= guest.full_name %></td>
+                            <td><%= guest.contact_info.phone || '' %></td>
+                            <td><%= guest.contact_info.email || '' %></td>
+                            <td><%= guest.contact_info.address || '' %></td>
+                            <td><%= new Date(guest.created_at).toLocaleString() %></td>
+                            <td><%= new Date(guest.updated_at).toLocaleString() %></td>
+                            <td>
+                                <a href="/guests/<%= guest.id %>" class="button">Ko'rish</a>
+                                <a href="/guests/<%= guest.id %>/edit" class="button">Tahrirlash</a>
+                                <form action="/guests/<%= guest.id %>/delete" method="POST" style="display: inline;">
+                                    <button type="submit" class="delete-button">O'chirish</button>
+                                </form>
+                            </td>
+                        </tr>
+                    <% }); %>
+                <% } else { %>
+                    <tr><td colspan="7">Mehmonlar topilmadi</td></tr>
+                <% } %>
+            </tbody>
+        </table>
+        <br>
+        <a href="/" class="button">Bosh sahifaga qaytish</a>
+    </div>
+    <script src="/js/script.js"></script>
+</body>
+</html>

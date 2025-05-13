@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mehmon ma'lumotlari</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Mehmon ma'lumotlari</h1>
+        <p><strong>ID:</strong> <%= guest.id %></p>
+        <p><strong>To'liq ismi:</strong> <%= guest.full_name %></p>
+        <p><strong>Telefon:</strong> <%= guest.contact_info.phone || 'Yo\'q' %></p>
+        <p><strong>Email:</strong> <%= guest.contact_info.email || 'Yo\'q' %></p>
+        <p><strong>Manzil:</strong> <%= guest.contact_info.address || 'Yo\'q' %></p>
+        <p><strong>Yaratilgan vaqti:</strong> <%= new Date(guest.created_at).toLocaleString() %></p>
+        <p><strong>Yangilangan vaqti:</strong> <%= new Date(guest.updated_at).toLocaleString() %></p>
+        <br>
+        <a href="/guests/<%= guest.id %>/edit" class="button">Tahrirlash</a>
+        <a href="/guests" class="button">Mehmonlar ro'yxatiga qaytish</a>
+        <a href="/" class="button">Bosh sahifaga qaytish</a>
+    </div>
+    <script src="/js/script.js"></script>
+</body>
+</html>

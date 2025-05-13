@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yangi Xona Turi Qo‘shish</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Yangi Xona Turi Qo‘shish</h1>
+        <form action="/room-types" method="POST">
+            <div>
+                <label for="type_name">Nomi:</label>
+                <input type="text" id="type_name" name="type_name" required>
+            </div>
+            <div>
+                <label for="description">Tavsif:</label>
+                <input type="text" id="description" name="description">
+            </div>
+            <button type="submit">Saqlash</button>
+        </form>
+        <br>
+        <a href="/room-types" class="button">Xona turlari ro‘yxatiga qaytish</a>
+        <a href="/" class="button">Bosh sahifaga qaytish</a>
+    </div>
+    <script src="/js/script.js"></script>
+</body>
+</html>

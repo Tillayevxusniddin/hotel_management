@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xona Turlari</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Xona Turlari</h1>
+        <a href="/room-types/create" class="button">Yangi xona turi qo‘shish</a>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nomi</th>
+                    <th>Tavsif</th>
+                    <th>Yaratilgan vaqti</th>
+                    <th>Amallar</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% if (roomTypes && roomTypes.length > 0) { %>
+                    <% roomTypes.forEach(roomType => { %>
+                        <tr>
+                            <td><%= roomType.id %></td>
+                            <td><%= roomType.type_name %></td>
+                            <td><%= roomType.description || 'Yo‘q' %></td>
+                            <td><%= new Date(roomType.created_at).toLocaleString() %></td>
+                            <td>
+                                <a href="/room-types/<%= roomType.id %>" class="button">Ko‘rish</a>
+                                <a href="/room-types/<%= roomType.id %>/edit" class="button">Tahrirlash</a>
+                                <form action="/room-types/<%= roomType.id %>" method="POST" style="display: inline;">
+                                    <input type="hidden" name="_method" value="DELETE">
+                                    <button type="submit" class="delete-button">O‘chirish</button>
+                                </form>
+                            </td>
+                        </tr>
+                    <% }); %>
+                <% } else { %>
+                    <tr><td colspan="5">Xona turlari topilmadi</td></tr>
+                <% } %>
+            </tbody>
+        </table>
+        <br>
+        <a href="/" class="button">Bosh sahifaga qaytish</a>
+    </div>
+    <script src="/js/script.js"></script>
+</body>
+</html>

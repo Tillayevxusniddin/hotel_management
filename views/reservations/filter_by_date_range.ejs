@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sana bo‘yicha filtrlash</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Sana bo‘yicha filtrlash</h1>
+        <form action="/reservations/filter/by-date-range" method="GET">
+            <label for="start_date">Boshlanish sanasi:</label>
+            <input type="date" id="start_date" name="start_date" value="<%= start_date || '' %>" required>
+            <label for="end_date">Tugash sanasi:</label>
+            <input type="date" id="end_date" name="end_date" value="<%= end_date || '' %>" required>
+            <button type="submit">Filtrlash</button>
+        </form>
+        <% if (error) { %>
+            <p style="color: red;"><%= error %></p>
+        <% } %>
+        <% if (reservations && reservations.length > 0) { %>
+            <h2>Natijalar</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Mehmon</th>
+                        <th>Xona</th>
+                        <th>Kirish sanasi</th>
+                        <th>Chiqish sanasi</th>
+                        <th>Holat</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% reservations.forEach(reservation => { %>
+                        <tr>
+                            <td><a href="/reservations/<%= reservation.id %>"><%= reservation.full_name %></a></td>
+                            <td><%= reservation.room_number %></td>
+                            <td><%= new Date(reservation.check_in_date).toLocaleDateString() %></td>
+                            <td><%= new Date(reservation.check_out_date).toLocaleDateString() %></td>
+                            <td><%= reservation.status %></td>
+                        </tr>
+                    <% }); %>
+                </tbody>
+            </table>
+        <% } else if (start_date && end_date) { %>
+            <p>Bandlovlar topilmadi</p>
+        <% } %>
+        <a href="/reservations" class="button">Bandlovlar ro‘yxatiga qaytish</a>
+    </div>
+</body>
+</html>

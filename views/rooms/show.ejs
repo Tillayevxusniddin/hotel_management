@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xona ma'lumotlari</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Xona ma'lumotlari</h1>
+        <p><strong>ID:</strong> <%= room.id %></p>
+        <p><strong>Xona raqami:</strong> <%= room.room_number %></p>
+        <p><strong>Turi:</strong> <%= room.type_name %></p>
+        <p><strong>Narxi (bir kecha):</strong> <%= room.price_per_night %></p>
+        <p><strong>Yaratilgan vaqti:</strong> <%= new Date(room.created_at).toLocaleString() %></p>
+        <p><strong>Yangilangan vaqti:</strong> <%= new Date(room.updated_at).toLocaleString() %></p>
+        <br>
+        <a href="/rooms/<%= room.id %>/edit" class="button">Tahrirlash</a>
+        <a href="/rooms" class="button">Xonalar ro'yxatiga qaytish</a>
+        <a href="/" class="button">Bosh sahifaga qaytish</a>
+    </div>
+    <script src="/js/script.js"></script>
+</body>
+</html>

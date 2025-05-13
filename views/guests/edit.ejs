@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mehmonni tahrirlash</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Mehmonni tahrirlash</h1>
+        <form action="/guests/<%= guest.id %>/update" method="POST">
+            <div>
+                <label for="full_name">To'liq ismi:</label>
+                <input type="text" id="full_name" name="full_name" value="<%= guest.full_name %>" required>
+            </div>
+            <div>
+                <label for="phone">Telefon:</label>
+                <input type="text" id="phone" name="phone" value="<%= guest.contact_info.phone || '' %>">
+            </div>
+            <div>
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" value="<%= guest.contact_info.email || '' %>">
+            </div>
+            <div>
+                <label for="address">Manzil:</label>
+                <input type="text" id="address" name="address" value="<%= guest.contact_info.address || '' %>">
+            </div>
+            <button type="submit">Saqlash</button>
+        </form>
+        <br>
+        <a href="/guests/<%= guest.id %>" class="button">Mehmon ma'lumotlariga qaytish</a>
+        <a href="/guests" class="button">Mehmonlar ro'yxatiga qaytish</a>
+        <a href="/" class="button">Bosh sahifaga qaytish</a>
+    </div>
+    <script src="/js/script.js"></script>
+</body>
+</html>
